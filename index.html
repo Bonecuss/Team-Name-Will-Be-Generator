@@ -76,11 +76,12 @@ function /*changetext*/()
 			myPlayer.on("YTPReady",function(){
 			if (!done) {
 			myPlayer.YTPStop();
-			var startt = parseInt(person.substring(person.indexOf("&t=")+3,person.length));
+			var startt = 0;
+			startt += parseInt(person.substring(person.indexOf("&t=")+3,person.length));
 			//alert(startt);
 			var url = person.substring(0,person.indexOf("&t="));
 			//alert(url);
-			myPlayer.YTPChangeMovie({containment:'#container',startAt:startt,videoURL:url,autoPlay:true, loop:false, mute:false, addRaster:true, quality:'default',ratio:'4/3'});
+			myPlayer.YTPChangeMovie({containment:'#container',startAt:-1,videoURL:person,autoPlay:true, loop:false, mute:false, addRaster:true, quality:'default',ratio:'4/3'});
 			done=true;
 			}
 			});}, text.length*100+1000);
