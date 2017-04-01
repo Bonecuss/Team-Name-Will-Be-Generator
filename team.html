@@ -76,7 +76,7 @@ function /*changetext*/()
 			myPlayer.on("YTPReady",function(){
 			if (!done) {
 			myPlayer.YTPStop();
-			myPlayer.YTPChangeMovie({containment:'#container',startAt:0,videoURL:person,autoPlay:true, loop:false, mute:false, addRaster:true, quality:'default',ratio:'4/3'});
+			myPlayer.YTPChangeMovie({containment:'#container',startAt:-1,videoURL:person,autoPlay:true, loop:false, mute:false, addRaster:true, quality:'default',ratio:'4/3'});
 			done=true;
 			}
 			});}, text.length*100+1000);
