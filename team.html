@@ -62,6 +62,15 @@ function /*changetext*/()
 		tb.parentNode.removeChild(tb);
 		tb2.parentNode.removeChild(tb2);
 		submit.parentNode.removeChild(submit);
+		var myPlayer = jQuery(".player").YTPlayer();
+		if (person!="") {
+			myPlayer.on("YTPReady",function(){
+			if (!done) {
+			myPlayer.YTPChangeMovie({containment:'#container',startAt:-1,videoURL:person,autoPlay:true, loop:false, mute:false, addRaster:true, quality:'default',ratio:'4/3'});
+			myPlayer.YTPStop();
+			done=true;
+			}
+		}
 		setTimeout(function(){responsiveVoice.speak(text, "UK English Male", {pitch: 1});}, 1741);
 		//alert(person);
 		if (person!="") {
@@ -72,14 +81,14 @@ function /*changetext*/()
 			//myplayer.YTPPause();
 			//setTimeout(function(){var myPlayer = jQuery(".player").YTPlayer();},1000);
 			var done = false;
-			setTimeout(function(){var myPlayer = jQuery(".player").YTPlayer();
-			myPlayer.on("YTPReady",function(){
-			if (!done) {
-			myPlayer.YTPStop();
-			myPlayer.YTPChangeMovie({containment:'#container',startAt:-1,videoURL:person,autoPlay:true, loop:false, mute:false, addRaster:true, quality:'default',ratio:'4/3'});
-			done=true;
-			}
-			});}, text.length*100+1000);
+			setTimeout(function(){//var myPlayer = jQuery(".player").YTPlayer();
+			//myPlayer.on("YTPReady",function(){
+			//if (!done) {
+			myPlayer.YTPPlay();
+			//myPlayer.YTPChangeMovie({containment:'#container',startAt:-1,videoURL:person,autoPlay:true, loop:false, mute:false, addRaster:true, quality:'default',ratio:'4/3'});
+			//done=true;
+			//}
+			}, text.length*100+1000);
 		}
 	}
 })
