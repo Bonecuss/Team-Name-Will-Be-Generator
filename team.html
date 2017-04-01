@@ -62,7 +62,7 @@ function /*changetext*/()
 		tb.parentNode.removeChild(tb);
 		tb2.parentNode.removeChild(tb2);
 		submit.parentNode.removeChild(submit);
-		setTimeout(function(){responsiveVoice.speak(text);}, 1741);
+		setTimeout(function(){responsiveVoice.speak(text, "UK English Male", {pitch: 1});}, 1741);
 		alert(person);
 		if (person!="") {
 			//var myPlayer = jQuery(".player").YTPlayer();
