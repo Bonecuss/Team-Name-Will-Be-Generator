@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<!--Created by Bonecuss from the forums of Kazamatsuri, a home for Key fans.-->
+<head>
+<title>The team name will be...</title>
+<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+<script src='jquery.min.js'></script>
+<script src='jquery.jplayer.min.js'></script>
+<script src='jquery.mb.YTPlayer.js'></script>
+=
+<script>
+function utf8_to_b64(str) {
+    return window.btoa(unescape(encodeURIComponent(str)));
+}
+function b64_to_utf8(str) {
+    return decodeURIComponent(escape(window.atob(str)));
+}
+jQuery(
+function /*changetext*/()
+{
+	var url = window.location.href;
+	var text;
+	var person;
+	if(url.lastIndexOf('?') != -1) 
+	{
+		// Handle old-style ?[text]?[person] URLs
+		if (url.indexOf('?') != url.lastIndexOf('?')) {
+			text = url.substring(url.indexOf('?')+1, url.lastIndexOf('?'));
+			person = url.substring(url.lastIndexOf('?')+1);
+			text = decodeURIComponent(text);	
+			person = decodeURIComponent(person);
+			text = b64_to_utf8(text);
+			person = b64_to_utf8(person);
+		} else { // Handle new-style ?[text\0person] URLs
+			var combined = url.substring(url.indexOf('?') + 1);
+			combined = decodeURIComponent(combined);
+			combined = b64_to_utf8(combined);
+			var parts = combined.split('\0');
+			text = parts[0];
+			person = parts[1];
+		}
+		
+		//alert(text + " ## " + person);
+		/*document.getElementById("text").innerHTML = "<br> <br> <br> " + text;
+		document.getElementById("text2").innerHTML = "<br> <br> <br> " + text;
+		
+		if (!(text.length>40))
+		{
+			document.getElementById("person").innerHTML = "<br> <br> <br> <br>" + person;
+			document.getElementById("person2").innerHTML = "<br> <br> <br> <br>" + person;
+		}
+		else
+		{
+			document.getElementById("person").innerHTML = "<br> <br> <br> <br> <br>" + person;
+			document.getElementById("person2").innerHTML = "<br> <br> <br> <br> <br>" + person;
+		}
+		*/
+		
+		var tb = document.getElementById("tb");
+		var tb2 = document.getElementById("tb2");
+		var submit = document.getElementById("submit");
+		tb.parentNode.removeChild(tb);
+		tb2.parentNode.removeChild(tb2);
+		submit.parentNode.removeChild(submit);
+		setTimeout(function(){responsiveVoice.speak(text, "UK English Male", {pitch: 1});}, 1741);
+		//alert(person);
+		if (person!="" && person!="Youtube URL") {
+			//var myPlayer = jQuery(".player").YTPlayer();
+			//myPlayer.YTPStop();
+			//myPlayer.videoURL = person;
+			//myplayer.YTPChangeMovie({videoURL:person});
+			//myplayer.YTPPause();
+			//setTimeout(function(){var myPlayer = jQuery(".player").YTPlayer();},1000);
+			var done = false;
+			setTimeout(function(){var myPlayer = jQuery(".player").YTPlayer();
+			myPlayer.on("YTPReady",function(){
+			if (!done) {
+			myPlayer.YTPStop();
+			myPlayer.YTPChangeMovie({containment:'#container',startAt:-1,videoURL:person,autoPlay:true, loop:false, mute:false, addRaster:true, quality:'default',ratio:'4/3'});
+			done=true;
+			}
+			});}, text.length*100+1000);
+		}
+	}
+})
+function generate(){
+	var url = window.location.href + "?";
+	var tb = document.getElementById("tb");
+	var text = tb.value;
+	var tb2 = document.getElementById("tb2");
+	var text2 = tb2.value;
+	text2 = text2.substring(text2.indexOf('v=')+2,text2.length);
+	var data = utf8_to_b64(text + '\0' + text2).replace(/\=*$/, '');
+	url = url + data;
+	window.location.href = url
+};
+</script>
+<style>
+body {
+	background-color:black;
+}
+div#container{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 800px;
+	height: 600px;
+	max-height = 600px;
+	max-width = 800px;
+	background-image: url('teamname.png');
+	background-size: 100%, 100%;
+	background-repeat: no-repeat;
+	background-position:50%,50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	vertical-align: middle;
+}
+img#content {
+	text-align: center;
+	vertical-align: middle;
+	margin-bottom: 5px;
+}
+div#videoshell {
+	width: 800px;
+	height: 600px;
+}
+.player {
+	width: 800px;
+	height: 600px;
+}
+iframe#mbYTP_video {
+	width: 800px;
+	height: 600px;
+	max-width:800px;
+}
+.playerBox {
+	width: 800px;
+	height: 600px;
+	max-width:800px;
+}
+div#form {
+text-align: center;
+vertical-align: middle;
+position:absolute;
+top:100%;
+left:2%;
+}
+input#tb {
+	background-color : #0A0A0A;
+	border: 1px solid double #707070;
+	text-shadow: 0px 0px 15px black;
+	font-size:30px;
+	font-family: "MS Gothic";
+	text-align: center;
+	color:white;
+	vertical-align: middle;
+	width:380px; 
+	height:40px; 
+	top: 5px;
+}
+input#tb2 {
+	background-color : #0A0A0A;
+	border: 1px solid double #707070;
+	text-shadow: 0px 0px 15px black;
+	font-size:30px;
+	font-family: "MS Gothic";
+	text-align: center;
+	color:white;
+	vertical-align: middle;
+	width:200px; 
+	height:40px; 
+}
+input#submit {
+	background-color : #0A0A0A;
+	border: 1px solid double #707070;
+	text-shadow: 0px 0px 15px black;
+	font-size:30px;
+	font-family: "MS Gothic";
+	text-align: center;
+	color:white;
+	vertical-align: middle;
+	width:150px; 
+	height:46px; 
+	top: 5px;
+}
+</style>
+</head>
+<body>
+	<div id = "container">
+		<div id="form">
+			<input type="text" name="tb" id="tb" value="Team Name Here" onclick="this.value='';" onfocus="this.value='';">
+			<input type="text" name="tb2" id="tb2" value="Youtube URL" onclick="this.value='';" onfocus="this.value='';">
+			<input type="submit" value="Generate" id="submit" onclick="generate()">
+		</div>
+		<div id = "videoshell">
+			<div id = "video" class="player" data-property="{videoURL:'IBi0AcO5Q3Q',containment:'self', showControls:false, autoPlay:true, loop:false, mute:false, startAt:0, opacity:1, addRaster:true, quality:'default', ratio:'4/3'}"></div>
+		</div>
+	</div>
+	<!--<body onload="changetext();">-->
+</body>
+<audio id="bgm" autoplay="autoplay" controls="controls" hidden=true>  
+	<source src="team.mp3" />  
+</audio>
+</html>
