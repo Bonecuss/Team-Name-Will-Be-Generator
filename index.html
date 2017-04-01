@@ -63,7 +63,7 @@ function /*changetext*/()
 		tb2.parentNode.removeChild(tb2);
 		submit.parentNode.removeChild(submit);
 		setTimeout(function(){responsiveVoice.speak(text, "UK English Male", {pitch: 1});}, 1741);
-		alert(person);
+		//alert(person);
 		if (person!="" && person!="Youtube URL") {
 			//var myPlayer = jQuery(".player").YTPlayer();
 			//myPlayer.YTPStop();
@@ -77,9 +77,9 @@ function /*changetext*/()
 			if (!done) {
 			myPlayer.YTPStop();
 			var startt = parseInt(person.substring(person.indexOf("&t=")+3,person.length));
-			alert(startt);
+			//alert(startt);
 			var url = person.substring(0,person.indexOf("&t="));
-			alert(url);
+			//alert(url);
 			myPlayer.YTPChangeMovie({containment:'#container',startAt:startt,videoURL:url,autoPlay:true, loop:false, mute:false, addRaster:true, quality:'default',ratio:'4/3'});
 			done=true;
 			}
